@@ -1,0 +1,54 @@
+@startuml
+' Diagrama de clases Abstract Factory - Vehículos
+
+interface VehicleFactory {
+    +createVehicle(type: String): Vehicle
+}
+
+class LandVehicleFactory {
+    +createVehicle(type: String): Vehicle
+}
+
+class WaterVehicleFactory {
+    +createVehicle(type: String): Vehicle
+}
+
+interface Vehicle {
+    +move(): void
+}
+
+class Sedan {
+    +move(): void
+}
+
+class SportBike {
+    +move(): void
+}
+
+class SailBoat {
+    +move(): void
+}
+
+class SpeedBoat {
+    +move(): void
+}
+
+class VehicleShop {
+    -vehicle: Vehicle
+    +VehicleShop(factory: VehicleFactory, type: String)
+    +showVehicle(): void
+}
+
+' Relaciones
+VehicleFactory <|.. LandVehicleFactory
+VehicleFactory <|.. WaterVehicleFactory
+
+Vehicle <|.. Sedan
+Vehicle <|.. SportBike
+Vehicle <|.. SailBoat
+Vehicle <|.. SpeedBoat
+
+VehicleShop --> VehicleFactory : uses
+VehicleShop --> Vehicle : has
+
+@enduml
